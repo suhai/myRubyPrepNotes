@@ -1,5 +1,6 @@
 # ruby file
 puts 1 - 2 == -1
+puts 3 + 2 == 4
 puts 'peter piper picked a peck of pickle pepper'
 
 puts
