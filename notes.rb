@@ -1,5 +1,6 @@
 # ruby file
 #
+
 puts 1 - 2 == -1
 puts 3 + 2 == 4
 puts 'peter piper picked a peck of pickle pepper'
@@ -163,7 +164,7 @@ puts
 #
 # Difficulty: easy.
 puts " ===== factorial ===== "
-def factorial (n)
+def factorial(n)
   result = 1
   if n == 0
     result
@@ -491,7 +492,7 @@ puts " ===== reverse string ===== "
 # Don't use String's reverse method; that would be too simple.
 #
 # Difficulty: easy.
-def reverse (string)
+def reverse(string)
    rev_string = "" 
    string.scan(/\w/) { |w| rev_string = w + rev_string }
    rev_string
@@ -870,7 +871,7 @@ puts
 puts " ===== Miscellaneous Methods ===== "
 #1
 num = [1,2,3,4,5]
-def doubler (arr)
+def doubler(arr)
     arr.map {|x| x * 2}.inspect
 end
 puts doubler (num)
@@ -878,7 +879,7 @@ puts doubler (["a", "b", "c"])
 puts 
 
 #2
-def median_int (arr)
+def median_int(arr)
   sorted = arr.sort
   sorted.length.odd? ? sorted[((arr.length - 1)/2)] : 
   ((sorted[(arr.length)/2 - 1] + sorted[arr.length/2])/2.0)
@@ -950,10 +951,10 @@ puts favorite_indices.inspect
 puts
 
 #Nest within a nest
-(1..10).each do |i|
+(1..10).each do |ii|
   multiples = []
   (1..10).each do |j|
-    multiples << i * j
+    multiples << ii * j
   end
   puts multiples.inspect
 end
