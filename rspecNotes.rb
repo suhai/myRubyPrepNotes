@@ -13,4 +13,5 @@
 # 7. Run 'bundle install' inside the rootDirectory from terminal. This would create the 'Gemfile.lock' file
 # 8. cd into the lib directory and create your file(s) that would contain the code to be tested. Ex. hello.rb, fibonacci.rb
 # 9. cd into the spec directory and create your spec or test file(s). These should ideally have take the name of their corresponding code files. Ex. hello_spec.rb, fibonacci_spec.rb.
-10. After all the above is done and working, Run 'bundle exec rspec spec/fileName_spec.rb' to run a particular test file. Ex. bundle exec rspec spec/hello_spec.rb
+# 10. After all the above is done and working, Run 'bundle exec rspec spec/fileName_spec.rb' to run a particular test file. Ex. bundle exec rspec spec/hello_spec.rb
+# 11. Run 'bundle exec rspec' to run all available tests.
