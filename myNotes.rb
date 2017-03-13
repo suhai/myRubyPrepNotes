@@ -2,9 +2,18 @@
 puts " ===== MY RUBY NOTES ===== "
 #-----------------------------------------------------------------------------
 puts " Demorgan's Law is given by : (x && y) == !(!x || !y) "
-# NAMING GUIDELINES
+# In propositional logic and boolean algebra, De Morgan's laws[1][2][3] are a pair of transformation rules that are both valid rules of inference. They are named after Augustus De Morgan, a 19th-century British mathematician. The rules allow the expression of conjunctions and disjunctions purely in terms of each other via negation.
+# The rules can be expressed in English as:
+# The negation of a conjunction is the disjunction of the negations; and
+#The negation of a disjunction is the conjunction of the negations;
+# or
+# The complement of the union of two sets is the same as the intersection of their complements; and
+# The complement of the intersection of two sets is the same as the union of their complements.
+
+
+puts "NAMING GUIDELINES" 
 # snake_case:  (not CamelCase) when naming methods, variables, and files. 
-# camelCase:  for classes and modules.
+# CamelCase:  for classes and modules.
 # SCREAMING_SNAKE_CASE:  for other constants.
 # adjective?:  for methods that return a boolean value (i.e. true or false) 
 # word!:  for safe mothods or methods that are potentially 'dangerous' (e.g., because they modify the calling object or arguments. ex. map! changes the original array).
@@ -95,8 +104,10 @@ puts (11 % 2)
 puts (9 / 2)
 puts (9.0 / 2)
 puts (9.fdiv(2))
-puts(123 == 123) # true:
-puts(!(123 == 123)) # false:
+puts 123 == 123 # true
+puts 123.eql?(123) # true
+puts 123.eql?(231) # false
+puts(!(123 == 123)) # false
 seven = "4".to_i + "3".to_i;     puts seven
 not_seven = "4" + "3";    puts(not_seven)
 one = 1.to_s;    three = 3.to_s
@@ -114,16 +125,18 @@ puts "Three" == "Three"
 puts
 
 arr = [2, 3, 5, 7]
-puts(arr[0]) # prints 2, the item at position zero
+puts arr[0] # prints 2, the item at position zero
 item = arr.shift # remove 2 from the array
-puts(item) # prints 2
-puts(arr == [3, 5, 7]) # prints true; the leading 2 is removed
+puts item # prints 2
+puts arr == [3, 5, 7] # prints true; the leading 2 is removed
 arr = [2, 3, 5, 7] # reset arr
-puts(arr[3]) # prints 7, the last item of the array
+puts arr[3] # prints 7, the last item of the array
 item = arr.pop # remove 7 from array
-puts(item) # prints 7
-puts(arr.length) # prints 3, since there are only three items left
-puts(arr == [2, 3, 5]) # prints true; only the seven is removed
+puts item # prints 7
+puts arr.length # prints 3, since there are only three items left
+puts arr == [2, 3, 5] # prints true; only the seven is removed
+puts [1, 2, 3].shift # 1
+puts [1, 2, 3].unshift(7).inspect # [7, 1, 2, 3]
 puts
 print "2 + 2 is equal to ", 2 + 2
 puts
@@ -138,6 +151,8 @@ puts "a".ord
 puts "A".ord
 puts "z".ord
 puts "Z".ord
+puts 97.chr.ord # 97
+puts "Z".ord.chr # Z
 puts 
 puts "b".next 
 puts "z".next 
@@ -238,7 +253,7 @@ class Dog < Pet
 end
 
 class Bird < Pet 
-    attr_accessor :length
+  attr_accessor :length
 end
 
 a_bird = Bird.new
@@ -265,7 +280,7 @@ puts
 puts 2.class
 puts "hello".class
 puts 3.33.class
-puts puts.class
+# puts puts.class
 Kernel.puts "Hello world!"
 puts "Test" + "Test"
 puts "Test".capitalize
@@ -347,7 +362,7 @@ puts
 puts "Suhai " * 3
 puts 
 
-puts true if 120.chr == "x"
+puts true if 120.chr.eql?("x")
 puts  true if "A".sum == 65
 puts false if "z".ord != 123
 puts "Suhai".sum
@@ -583,7 +598,7 @@ puts %q(albatross dog horse).inspect
 puts
 
 #.each_char and .each_index
-puts " ===== each_char ====="
+puts " ===== each_char  and each_index ====="
 "hello".each_char {|c| print c }.inspect
 puts
 "hello".split("").each_index {|c| print c, ' '}.inspect
@@ -592,27 +607,28 @@ puts
 
 puts " ===== all? ====="
 puts %w[ant bear cat].inspect
-puts %w[ant bear cat].all? { |word| word.length >= 3 } #=> true
-puts %w[ant bear cat].all? { |word| word.length >= 4 } #=> false
+puts %w[ant bear cat].all? { |word| word.length >= 3 } # true
+puts %w[ant bear cat].all? { |word| word.length >= 4 } # false
 puts 
 
 puts " ===== any? ====="
-puts %w[ant bear cat].any? { |word| word.length >= 3 } #=> true
-puts %w[ant bear cat].any? { |word| word.length >= 5 } #=> true
+puts %w[ant bear cat].any? { |word| word.length >= 3 } # true
+puts %w[ant bear cat].any? { |word| word.length >= 5 } # false
 puts
 
 puts " ===== none? ====="
-puts %w[ant bear cat].none? { |word| word.length >= 3 } #=> true
-puts %w[ant bear cat].none? { |word| word.length >= 5 } #=> true
+puts %w[ant bear cat].none? { |word| word.length >= 3 } # false
+puts %w[ant bear cat].none? { |word| word.length >= 5 } # true
 puts 
 
 puts " ===== one? ====="
-puts %w[ant bear cat].one? { |word| word.length >= 3 } #=> true
-puts %w[ant bear cat].one? { |word| word.length >= 5 } #=> true
+puts %w[ant bear cat].one? { |word| word.length >= 4 } # true
+puts %w[ant cat abcdefghijk 1234567890].one? { |word| word.length >= 9 } # false
+puts %w[ant bears cat].one? { |word| word.length == 5 } # true
 puts
 puts " ===== reject ====="
-puts %w[ant bear cat ox].reject {|word| word.length > 3 }.inspect
-puts %w[ant bear cat ox].reject {|word| word.length < 3 }.inspect 
+puts %w[ant bear cat ox].reject {|word| word.length > 3 }.inspect # 
+puts %w[ant bear cat ox].reject {|word| word.length < 3 }.inspect #
 puts
 
 puts " ===== member ====="
@@ -623,11 +639,11 @@ puts %q(cat dog sheep).include?("sheep")
 #puts %q(cat dog sheep).member?("sheep") #=> invalid for '.member?'
 puts
 
-puts %w(1 2 3 4 5).inspect
-puts %w(1 2 3 4 5).member?(5) #=> false
-puts %w(1 2 3 4 5).member?(5.to_s) #=> true
-puts [1, 2, 3, 4, 5].member?(3)
-puts [1, 2, 3, 4, 5].include?(3)
+puts %w(1 2 3 4 5).inspect # ["1", "2", "3", "4", "5"]
+puts %w(1 2 3 4 5).member?(5) # false
+puts %w(1 2 3 4 5).member?(5.to_s) # true
+puts [1, 2, 3, 4, 5].member?(3) # true
+puts [1, 2, 3, 4, 5].include?(3) # true
 puts 
 
 puts " ===== max,  max_by ====="
@@ -749,7 +765,7 @@ puts ["AB","CD","EF","GH","IJ"].map(&:inspect).join(',') #don't like this atm
 # p ["AB","CD","EF","GH","IJ"].map(&:inspect).join(',') #don't really like this atm
 puts ["50", "51", "52", "53", "54"]*","
 # p ["50", "51", "52", "53", "54"]*","
-puts [90, 91, 92, 93, 94]*","
+puts [90, 91, 92, 93, 94]*";"
 # p [90, 91, 92, 93, 94]*","
 puts
 
@@ -916,8 +932,8 @@ puts aj.sample(4).inspect      #=> [6, 4, 2, 5]
 puts
 
 
-an_arr = [1,2,3,4,5]
-some_arr = ["a","b","c","d","e"]
+an_arr = [1, 2, 3, 4, 5]
+some_arr = ["a", "b", "c", "d", "e"]
 #a_string = "56789"
 a_string = "56789".split("")
 #some_string = "aeiou"
@@ -1040,7 +1056,7 @@ puts rand(9)
 puts rand(9)
 puts rand(9)
 puts rand(9)
-puts ""
+puts 
 #srand causes the same random numbers to be generated in the 
 #same sequence if "srand-ed" with the same number; "10" in this
 #case. to undo srand, you just do "srand 0" and every subsequent 
@@ -1058,13 +1074,13 @@ puts rand(9)
 puts rand(9)
 puts
 
-puts 5.integer? # 5.is_a?(Integer)
-puts 5.is_a?(Integer)
-puts 2.pred
-puts 2.next
-puts 3.even?
+puts 5.integer? # true
+puts 5.is_a?(Integer) # true
+puts 2.pred # 1
+puts 2.next # 3
+puts 3.even? # false
 puts
-puts 3.odd?
+puts 3.odd? # true
 puts 4.6.round
 puts 4.5.round
 puts 4.4.round
@@ -1174,9 +1190,9 @@ puts vowels.max
 puts
 
 # Comparable
-puts 1 <=> 2
-puts 1 <=> 1
-puts 2 <=> 1
+puts 1 <=> 2 # -1
+puts 1 <=> 1 # 0
+puts 2 <=> 1 # 1
 puts 
 class Song
   include Comparable
@@ -1197,6 +1213,13 @@ puts b < c
 puts a.between?(b,c)
 puts
 
+puts 3.between?(2, 4)
+puts 3.between?(2, 3)
+puts 3.between?(1, 2)
+puts '4'.between?('2', '3')
+puts 'e'.between?('b', 'q')
+puts
+
 puts "B" > "A" # alphabets value increases from "a" to "z"
 puts "Z" > "B"
 puts "a" > "Z" # any lowercase is greater than any uppercase
@@ -1213,7 +1236,7 @@ puts
 
 2.times do
   puts "hi"
-  end
+end
  
 lineWidth = 40
 str = '--> text <--'
@@ -1271,11 +1294,11 @@ puts
 def testing(target, method)
   (0..100).each do |x|
     (0..100).each do |y|
-     if x * y == target
-       print "[#{x} * #{y}]:" + (x * y).to_s + "  "
-       break if method == "break"
-       return if method == "return"
-     end
+      if x * y == target
+        print "[#{x} * #{y}]:" + (x * y).to_s + "  "
+        break if method == "break"
+        return if method == "return"
+      end
     end 
   end
 end
@@ -1322,24 +1345,24 @@ puts weights.inspect
 puts
 
 def my_uniq(arr)
-    new_arr = []
-    arr.each do |i|
-        new_arr << i if !new_arr.include?(i)
-    end
-    new_arr.sort
+  new_arr = []
+  arr.each do |i|
+    new_arr << i if !new_arr.include?(i)
+  end
+  new_arr.sort
 end
 hola = [1,4,3,2,1,6,45,2,4,6,8,9,0,3,2,1,2,3,4,5,6,7,8,9,10,12]
 puts my_uniq(hola).inspect
 puts
 
 def two_sum(nums)
-    out_put = []
+  out_put = []
     nums.each do |x|
-        nums.each do |y|
-            out_put << "[#{x}:#{y}]" if x + y == 0
-        end
+      nums.each do |y|
+        out_put << "[#{x}:#{y}]" if x + y == 0
+      end
     end
-    out_put    
+  out_put    
 end
 plav = [-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9]
 puts two_sum(plav)
@@ -1364,13 +1387,13 @@ puts " ===== matrix transpose ===== "
 
 def my_transpose(matrix)
   transposed = []
-  matrix[0].length.times do
+  matrix[0].size.times do
     transposed << []
   end
   row = 0
-  while row < transposed.length
+  while row < transposed.size
     column = 0
-    while column < matrix.length
+    while column < matrix.size
       transposed[row] << matrix[column][row]
       column += 1
     end
@@ -1380,8 +1403,8 @@ def my_transpose(matrix)
 end
 row_oriented = [[1, 2, 3], ["a","b","c"], [7, 8, 9]]
 araba = [[1, "a", 7], [2, "b", 8], [3, "c", 9]]
-puts my_transpose(row_oriented).inspect
-puts my_transpose(araba).inspect
+puts my_transpose(row_oriented).inspect #[[1, "a", 7], [2, "b", 8], [3, "c", 9]]
+puts my_transpose(araba).inspect # [[1, 2, 3], ["a", "b", "c"], [7, 8, 9]]
 puts
 
 
@@ -1434,7 +1457,8 @@ puts
 
 
 puts " ===== each_with_object ====="
-puts (1..10).each_with_object([]) { |m, indx| indx << m * 2 }.inspect # [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+puts (1..10).each_with_object([]) { |m, obj| obj << m * 2 }.inspect # [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+puts (1..10).map { |m| m * 2 }.inspect # [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
 puts 
 
 puts " ===== break, exit, and return ===== "
@@ -1536,14 +1560,6 @@ p a.values_at(-1, -2, -2, -7)   # => ["f", "e", "e", nil]
 p a.values_at(4..6, 3...6)      # => ["e", "f", nil, "d", "e", "f"]
 puts
 
-#zip
-a = [ 4, 5, 6 ]
-b = [ 7, 8, 9 ]
-p [1, 2, 3].zip(a, b)   #=> [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
-p [1, 2].zip(a, b)      #=> [[1, 4, 7], [2, 5, 8]]
-p a.zip([1, 2], [8])    #=> [[4, 1, 8], [5, 2, nil], [6, nil, nil]]
-puts
-
 
 puts " ===== Classes, Blocks, and Yield ===== " 
 # 
@@ -1605,7 +1621,7 @@ puts
 
 def do_something_with_block
   return "No block given" unless block_given?
-  yield ('here we go again')
+  yield 'here we go again'
 end
 puts do_something_with_block
 puts do_something_with_block { |m| puts m}
@@ -1648,7 +1664,7 @@ class Array
     results
   end
 end
-puts [9,8,7].new_collect { |m| m + 1 }.inspect
+puts [9, 8, 7].new_collect { |m| m + 1 }.inspect
 puts
 
 days = ["mondaz", "tuesday", "wednesday", "thursday", "fridaz"]  
@@ -2198,9 +2214,10 @@ puts
 family.each { |m, n| puts "#{m}: #{n}" }
 puts
 
+
 #Arrays of Arrays 
 multi_d_array = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
-multi_d_array.each { |x| puts "#{x}" }
+multi_d_array.each { |m| puts "#{m}" }
 
 #Iterating Over Multidimensional Arrays 
 # s = [["ham", "swiss"], ["turkey", "cheddar"], ["roast beef", "gruyere"]]
@@ -2468,8 +2485,8 @@ puts
 
 puts (-10..-1).map(&:abs).inspect
 # we could also do this:
-puts 9.downto(2) {|x| print "#{x} "} # note the diff btwn this and below
-9.downto(2) {|x| print "#{x} "} # note the diff btwn this and above
+puts 9.downto(2) {|m| print "#{m} "} # note the diff btwn this and below
+9.downto(2) {|m| print "#{m} "} # note the diff btwn this and above
 puts
 puts 1.step(10, 2) { |i| print "#{i} "} # note the diff btwn this and below
 1.step(10, 2) { |i| print "#{i} "} # note the diff btwn this and above
