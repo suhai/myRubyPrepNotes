@@ -4418,6 +4418,122 @@ end
 # rps ("rock")
 puts
 
+puts " ===== 46. Sorting ===== "
+class Array
+  # QUICKSORT
+  def quick_sort
+    return self if self.length <= 1
+
+    pivot_index = rand(self.length)
+    pivot_value = self[pivot_index]
+    self.delete_at(pivot_index)
+
+    lesser = []
+    greater = []
+
+    self.each do |x|
+      if x <= pivot_value
+        lesser << x
+      else
+        greater << x
+      end
+    end
+
+    return lesser.quick_sort + [pivot_value] + greater.quick_sort
+  end
+
+  
+  # BUBBLE_SORT
+  def bubble_sort
+    return self if self.length <= 1
+    loop do
+
+      swapped = false
+      (self.count - 1).times do |i|
+        if self[i] >  self[i + 1]
+          self[i], self[i + 1] = self[i + 1], self[i]
+          swapped = true
+        end
+      end
+
+      break if not swapped
+    end
+
+    self
+  end
+
+
+  # MERGE_SORT
+  def merge_sort
+    return self if self.length <= 1
+    middle = self.length / 2
+    merge(self[0...middle].merge_sort, self[middle..-1].merge_sort)
+  end
+  #--------------------------------------------------------------------
+  def merge(left, right)
+    result = []
+    until left.length == 0 || right.length == 0 do
+      result << (left.first <= right.first ? left.shift : right.shift)
+    end
+    result + left + right
+  end
+
+
+  # BINARY SEARCH
+  # takes at most log-base-2 (n) number of searches to find the element. i.e, to what number must 2 be raised to in order to obtain 'n'. For example, log-base-2 (8) == 3, log-base-2 (1) == 0, log-base-2 (2) == 1, log-base-2 (64) == 6, log-base-2 (100) == 6.643856.
+  def binary_search(target)
+    arr = self.sort
+    return 'NOT FOUND' if arr.empty? || target > arr.last
+
+    low, hi = [0, self.count - 1]
+    mid = hi / 2
+    return arr[mid] if arr[mid].eql?(target)
+
+    if arr[mid] > target
+      arr[low..mid].binary_search(target)
+    else 
+      arr[(mid+1)..hi].binary_search(target)
+    end
+
+  end
+
+  #INSERTION_SORT 
+  def insertion_sort
+    result = [self.first]
+    self.delete_at(0)
+  
+    self.each do |i|
+      last_ind = 0
+      while last_ind < result.count
+        if i <= result[last_ind]
+          result.insert(last_ind, i)
+          break
+        elsif last_ind == result.count - 1
+          result.insert(last_ind + 1, i)
+          break
+        end
+        last_ind+= 1
+      end
+    end
+  
+    result
+  end
+
+  # SELECTION_SORT 
+  def selection_sort
+    # Selection sort can be very slow on large lists
+    (self.count - 1).times do |i|
+	    (i + 1).upto(self.count - 1) do |j| 
+        self[i], self[j] = self[j], self[i] if self[i] > self[j] 
+      end
+    end
+
+    self
+  end
+
+  # SHELL_SORT  
+end
+
 
 #TOWERS OF HANOI
 #T(#discs, #rods)  #rods is usually 3
