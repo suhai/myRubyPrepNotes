@@ -1020,6 +1020,11 @@ puts array.inspect # == [["a", "b", "c"], ["x", "y", "z"]]
 puts array.flatten!.inspect # == ["a", "b", "c", "x", "y", "z"]
 puts
 
+puts Array.new(3).inspect
+puts Array.new(3, 0).inspect
+puts Array.new(3, []).each { |arrr| arrr << Array.new([]) }.inspect
+puts Array.new(3, []).each { |arrr| arrr << Array.new(2, []) }.inspect
+puts 
 
 puts " ===== MATHEMATICS ===== "
 puts 7 / 2
