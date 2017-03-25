@@ -1,4 +1,8 @@
 #
+puts __FILE__ # returns the file path of the current file
+puts $PROGRAM_NAME # returns the file path of the current file
+puts
+#-----------------------------------------------------------------------------
 puts " ===== MY RUBY NOTES ===== "
 #-----------------------------------------------------------------------------
 puts " Demorgan's Law is given by : (x && y) == !(!x || !y) "
