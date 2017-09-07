@@ -69,8 +69,8 @@ puts " ===== 04 Letter Changes ====="
 #string. 
 # 01
 def LetterChanges(str)
-    string = str.tr("a-yzZA-Y","b-zaAB-Z")
-    string.tr("aeiou","AEIOU")
+  string = str.tr("a-yzZA-Y","b-zaAB-Z")
+  string.tr("aeiou","AEIOU")
 end
 puts "hello*3"
 puts "hello * 3"
@@ -97,7 +97,7 @@ puts " ===== 06 Letter Capitalize ====="
 #word. Words will be separated by only one space. 
 # 01
 def LetterCapitalize(str)
-    str.gsub(/\w+/) {|word| word.capitalize}
+  str.gsub(/\w+/) {|word| word.capitalize}
 end
 puts LetterCapitalize("suhai yehuza")
 puts LetterCapitalize("pope john paul")
@@ -128,9 +128,9 @@ puts " ===== 08 Check Nums ====="
 #greater than num1, otherwise return the string false. If the parameter 
 #values are equal to each other then return the string -1.
 # 01
-def CheckNums(num1,num2)
-    return "-1" if num1 == num2
-    num2 > num1
+def CheckNums(num1, num2)
+  return "-1" if num1 == num2
+  num2 > num1
 end
 puts CheckNums(8,8) # -1
 puts CheckNums(8,7) # false
@@ -176,8 +176,8 @@ puts " ===== 11 AB Check ====="
 def ABCheck(str)
   str.downcase.chars.each_with_index do |c, i| 
     return true if c == "a" && (str[i+4] == "b" || str[i-4] == "b")
-    end
-    false
+  end
+  false
 end
 puts ABCheck("After Badly")
 puts ABCheck("Laura sobs")
@@ -206,7 +206,7 @@ puts " ===== 13 Word Count ====="
 #contains (e.g. "Never eat shredded wheat or cake" would return 6). 
 #Words will be separated by single spaces. 
 def WordCount(str)
-    str.downcase.split(" ").count    
+  str.downcase.split(" ").count    
 end
 puts WordCount("Suhai Yehuza")
 puts WordCount("Pope John Paul")
@@ -1117,8 +1117,8 @@ def PalindromeCreator(str)
   result = ""
   
   (0..str.length-1).each do |idx1|
-        sub_str = str[0...idx1] + str[idx1+1..-1]
-        return str[idx1] if sub_str == sub_str.reverse && sub_str.length > 2
+    sub_str = str[0...idx1] + str[idx1+1..-1]
+    return str[idx1] if sub_str == sub_str.reverse && sub_str.length > 2
     (idx1..str.length-1).each do |idx2|
       sub_str = str[0...idx1] + str[idx1+1...idx2] + str[idx2+1..-1]
       if sub_str == sub_str.reverse && sub_str.length > 2
@@ -1192,40 +1192,41 @@ puts " ===== 52 Food Distribution ====="
 #people is now: 0, 0, 1, 1 and so your program should return the final minimized 
 #difference of 2. 
 def hunger(arr)
-   best = []
-   x =arr.length
-   x.times do |i|
-       total = 0
-       arr[i] -=1
-       (x-1).times do |ii|
-           y = arr[ii] - arr[ii+1]
-           total += y.abs
-       end
-       arr[i] +=1
-       best << total
-       #puts "b:#{best}"
+  best = []
+  x =arr.length
+  x.times do |i|
+    total = 0
+    arr[i] -=1
+    (x-1).times do |ii|
+      y = arr[ii] - arr[ii+1]
+      total += y.abs
+    end
+    arr[i] +=1
+    best << total
+    #puts "b:#{best}"
    end
-   low = best.min
-   return best.index(low)
+  low = best.min
+  return best.index(low)
 end
 # ===========================
 def FoodDistribution(arr)
-    sand = arr.shift
-    answers = []
-    while sand > 0
-       move = hunger(arr)
-       arr[move] = arr[move] -1
-       sand -= 1
-       min_dif = 0
-       m = (arr.length) - 1
-       m.times do |i|
-           a = arr[i] - arr[i+1]
-           min_dif += a.abs
-       end
-       answers << min_dif 
-   #puts "#{move}:#{answers}"
-   end
-   return answers.min
+  sand = arr.shift
+  answers = []
+  while sand > 0
+    move = hunger(arr)
+    arr[move] = arr[move] - 1
+    sand -= 1
+    min_dif = 0
+    m = (arr.length) - 1
+    m.times do |i|
+      a = arr[i] - arr[i+1]
+      min_dif += a.abs
+    end
+    answers << min_dif 
+    #puts "#{move}:#{answers}"
+  end
+
+  return answers.min
 end
 puts FoodDistribution([5, 3, 1, 2, 1]) # 0
 puts FoodDistribution([5, 2, 3, 4, 5]) # 1
@@ -1458,26 +1459,27 @@ def find_diff(time1, time2)
 end
 #================
 def convert_to_minutes(strArr)
-    strArr.map do |time|
-        flag = time[-2..-1]
-        just_time = time[0..-3].split(":").map(&:to_i)
-        just_time[0] += 12 if flag == 'pm' && just_time[0] != 12
-        just_time[0] -= 12 if flag == 'am' && just_time[0] == 12
-        
-        just_time[0] * 60 + just_time[1]
-    end
+  strArr.map do |time|
+    flag = time[-2..-1]
+    just_time = time[0..-3].split(":").map(&:to_i)
+    just_time[0] += 12 if flag == 'pm' && just_time[0] != 12
+    just_time[0] -= 12 if flag == 'am' && just_time[0] == 12
+    
+    just_time[0] * 60 + just_time[1]
+  end
 end
 #==================
 def TimeDifference(strArr)
-    arr = convert_to_minutes(strArr)
-    min_difference = nil
-    0.upto(arr.length - 2) do |idx1|
-       (idx1 + 1).upto(arr.length - 1) do |idx2|
-          difference = find_diff(arr[idx1], arr[idx2])
-          min_difference = difference if (min_difference.nil? || difference < min_difference)
-       end
+  arr = convert_to_minutes(strArr)
+  min_difference = nil
+  0.upto(arr.length - 2) do |idx1|
+    (idx1 + 1).upto(arr.length - 1) do |idx2|
+      difference = find_diff(arr[idx1], arr[idx2])
+      min_difference = difference if (min_difference.nil? || difference < min_difference)
     end
-    min_difference
+  end
+
+  min_difference
 end
 puts TimeDifference(["2:10pm", "1:30pm", "10:30am", "4:42pm"]) # 40
 puts TimeDifference(["1:10pm", "4:40am", "5:00pm"]) # 230
@@ -1495,7 +1497,7 @@ puts " ===== 59 Triangle Row ====="
 #the sum of that row. For example: if num is 4 then your program should return 
 #the sum of 1 + 4 + 6 + 4 + 1 which is 16. 
 def TriangleRow(num)
-    2**num  
+  2**num  
 end
 puts TriangleRow(4) # 16
 puts TriangleRow(1) # 2
@@ -1519,20 +1521,22 @@ puts " ===== 60 Vowel Square ====="
 #one that is at the most top-left position in the whole matrix. The input matrix 
 #will at least be of size 2x2. 
 def VowelSquare(strArr)
-    vowels = ['a', 'e', 'u', 'i', 'o']
-    0.upto(strArr.length - 2) do |row|
-      0.upto(strArr[row].length - 2) do |col|
-        small_square = [
-                        strArr[row][col],
-                        strArr[row][col + 1],
-                        strArr[row + 1][col],
-                        strArr[row + 1][col + 1]
-                       ]
-        return "#{row}-#{col}" if small_square.all? { |char| vowels.include?(char) }
+  vowels = ['a', 'e', 'u', 'i', 'o']
+  0.upto(strArr.length - 2) do |row|
+    0.upto(strArr[row].length - 2) do |col|
+      small_square = [
+        strArr[row][col],
+        strArr[row][col + 1],
+        strArr[row + 1][col],
+        strArr[row + 1][col + 1]
+      ]
+      return "#{row}-#{col}" if small_square.all? do |char| 
+        vowels.include?(char) 
       end
-   end
-   
-   'not found'
+    end
+  end
+  
+  'not found'
 end
 puts VowelSquare(["abcd", "eikr", "oufj"]) # 1-0
 puts VowelSquare(["aqrst", "ukaei", "ffooo"]) # 1-2
@@ -1549,16 +1553,16 @@ puts " ===== 61 Closest Enemy I ====="
 #It may not contain any 2's at all as well, where in that case your program 
 #should return a 0. 
 def ClosestEnemy(arr)
-    one_index = arr.index(1)
-    left, right = one_index, one_index
-    
-    while left != 0 || arr[right] != nil
-        return one_index - left if arr[left] == 2
-        return right - one_index if arr[right] == 2
-        left -= 1 if left != 0
-        right += 1
-    end
-    return 0
+  one_index = arr.index(1)
+  left, right = one_index, one_index
+  
+  while left != 0 || arr[right] != nil
+    return one_index - left if arr[left] == 2
+    return right - one_index if arr[right] == 2
+    left -= 1 if left != 0
+    right += 1
+  end
+  return 0
 end
 puts ClosestEnemy([0, 0, 1, 0, 0, 2, 0, 2]) # 3
 puts ClosestEnemy([1, 0, 0, 0, 2, 2, 2]) # 4
@@ -1622,17 +1626,18 @@ puts " ===== 02 Run Length ====="
 #end
 
 def RunLength(str)
-    result = ""
-    ctr = 1
-    0.upto(str.length-1) do |idx|
-       if str[idx] == str[idx+1]
-           ctr += 1
-       else
-           result += ctr.to_s + str[idx]
-           ctr = 1
-       end
+  result = ""
+  ctr = 1
+  0.upto(str.length-1) do |idx|
+    if str[idx] == str[idx+1]
+      ctr += 1
+    else
+      result += ctr.to_s + str[idx]
+      ctr = 1
     end
-    result
+  end
+  
+  result
 end
 puts RunLength("wwwggopp") # 3w2g1o2p
 puts RunLength("aabbcde") # "2a2b1c1d1e"

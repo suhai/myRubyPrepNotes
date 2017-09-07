@@ -1,6 +1,7 @@
 #
 puts __FILE__ # returns the file path of the current file
 puts $PROGRAM_NAME # returns the file path of the current file
+puts $0 # returns the file path of the current file just like $PROGRAM_NAME does
 puts
 #-----------------------------------------------------------------------------
 puts " ===== MY RUBY NOTES ===== "
@@ -4280,13 +4281,22 @@ puts " ===== 40. subsets ===== "
 #Write a method that, given an array of unique items, finds all the subsets
 def subsets(arr)
   my_arr = []
-  0.upto(arr.length).each { |i| my_arr = my_arr + arr.combination(i).to_a }
+  0.upto(arr.length).each { |i| my_arr += arr.combination(i).to_a }
   my_arr
 end
 puts subsets(["a", "b", "c"]) == [[], ["a"], ["b"], ["c"], ["a", "b"],
 ["a", "c"], ["b", "c"], ["a", "b", "c"]]
 puts subsets([1,2,3]) == [[], [1], [2], [3], [1, 2], [1, 3], [2, 3], [1, 2, 3]]
-puts
+
+# def subsets(arr)
+#   my_arr = []
+#   0.upto(arr.length).each { |i| my_arr << arr.combination(i).to_a }
+#   my_arr
+# end
+# puts subsets(["a", "b", "c"]) == [[], ["a"], ["b"], ["c"], ["a", "b"],
+# ["a", "c"], ["b", "c"], ["a", "b", "c"]]
+# puts subsets([1,2,3]) == [[], [1], [2], [3], [1, 2], [1, 3], [2, 3], [1, 2, 3]]
+# puts
 
 puts " ===== 41. Swingers Game ===== "
 #Implement a Swingers game. The method swingers should take an array of 
@@ -4456,7 +4466,6 @@ class Array
   def bubble_sort
     return self if self.length <= 1
     loop do
-
       swapped = false
       (self.count - 1).times do |i|
         if self[i] >  self[i + 1]
